@@ -12,7 +12,6 @@ spec:
     repoURL: https://github.com/jameshyphen/vibe-media-deploy
     targetRevision: HEAD
     path: apps/vibe-media
-    kustomize: {}
 
   # 2. Destination: Where to deploy it
   destination:
