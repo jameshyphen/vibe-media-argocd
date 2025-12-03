@@ -1,0 +1,7 @@
+# helm/argocd-app/values.yaml
+
+argocd:
+  namespace: argocd
+  configs:
+    cm:
+      timeout.reconciliation: "10s"

@@ -1,0 +1,12 @@
+# helm/argocd-app/Chart.yaml
+apiVersion: v2
+name: argocd-installation
+description: A wrapper chart to install Argo CD with custom settings.
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: argo-cd
+    version: "9.1.3"
+    repository: "https://argoproj.github.io/argo-helm"
+    alias: argocd

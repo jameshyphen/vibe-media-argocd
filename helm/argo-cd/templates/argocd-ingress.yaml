@@ -1,0 +1,26 @@
+# helm/argocd-instance/templates/argocd-ingress-local.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-local-ingress
+  # Use the Helm chart's namespace variable
+  namespace: {{ .Release.Namespace }} 
+  annotations:
+    # Use HTTPS backend protocol for the Argo CD server's service
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # Optional: If you need to expose your service locally, you might need a hostname.
+    # If using localhost/kind, ensure your host is correct.
+spec:
+  ingressClassName: nginx # Ensure 'nginx' is the correct Ingress Controller class name for your cluster (e.g., Kind/Minikube)
+  rules:
+    - host: localhost # Or your actual local hostname (e.g., argocd.local)
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                # Target the Argo CD server service created by the dependency chart
+                name: argocd-server 
+                port:
+                  number: 443

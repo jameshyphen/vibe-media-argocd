@@ -1,0 +1,26 @@
+# applications/root-app.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argocd 
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  
+  source:
+    repoURL: https://github.com/jameshyphen/vibe-media-argocd
+    targetRevision: HEAD 
+    path: applications 
+    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd 
+
+  syncPolicy:
+    automated:
+      selfHeal: true  # Ensures the Application CRs are restored if modified/deleted
+      prune: true
+    syncOptions:
+      - CreateNamespace=false # The namespace 'argocd' is assumed to exist
