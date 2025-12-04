@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vibe-media
+  name: vibe-media-t2
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,12 +11,12 @@ spec:
   source:
     repoURL: https://github.com/jameshyphen/vibe-media-deploy
     targetRevision: HEAD
-    path: apps/vibe-media
+    path: apps/vibe-media-t2
 
   # 2. Destination: Where to deploy it
   destination:
     server: https://kubernetes.default.svc
-    namespace: vibe-media
+    namespace: vibe-media-t2
 
   syncPolicy:
     automated:
